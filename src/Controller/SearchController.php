@@ -477,6 +477,10 @@ class SearchController extends ControllerBase {
    *   Pager render array.
    */
   protected function renderPager(ParameterBag $query, int $total, int $size) {
+    // Tell drupal about a pager being rendered. This
+    // is necessary to make pager links work correctly.
+    \Drupal::service('pager.manager')->createPager($total, $size);
+
     return [
       '#theme' => 'cgk_pager',
       '#tags' => [
