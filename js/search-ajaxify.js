@@ -140,8 +140,10 @@
           }
         });
 
+        let searchForm = $('[data-ajax-search-form]');
+
         let data = {
-          keyword: $('.js-form-item-keyword').find('input').val()
+          keyword: searchForm.find('input[name="keyword"]').val()
         };
 
         if (typeof page !== 'undefined') {
