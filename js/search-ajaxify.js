@@ -140,8 +140,10 @@
           }
         });
 
+        let searchForm = $('[data-ajax-search-form]');
+
         let data = {
-          keyword: $('[data-ajax-search-form]').find('input').val()
+          keyword: searchForm.find('input[name="keyword"]').val()
         };
 
         if (typeof page !== 'undefined') {
@@ -158,7 +160,10 @@
           history.pushState({}, '', '?' + $.param(data));
         }
 
-        $.post(url, data, function (data) {
+        // Append the requested page number to the url, since drupal's
+        // PagerManager uses the 'page' param from the incoming request.
+        let paged_url = url + '?' + $.param(data);
+        $.post(paged_url, data, function (data) {
           // Simulate a drupal.ajax response to correctly parse data.
           let ajaxObject = Drupal.ajax({
             url: '',
