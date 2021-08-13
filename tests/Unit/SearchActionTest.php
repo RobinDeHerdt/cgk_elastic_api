@@ -8,8 +8,14 @@ use Drupal\cgk_elastic_api\Search\Facet\FlatFacetValue;
 use Drupal\cgk_elastic_api\Search\FacetedSearchAction;
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ */
 class SearchActionTest extends TestCase {
 
+  /**
+   *
+   */
   public function testMorePagesData() {
     $this->assertTrue(TRUE);
   }

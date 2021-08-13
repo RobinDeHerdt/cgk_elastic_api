@@ -9,6 +9,9 @@ use Drupal\cgk_elastic_api\Search\Facet\FlatFacetValue;
 use Drupal\cgk_elastic_api\Search\Facet\HierarchicalFacetValue;
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ */
 class ChildOfTest extends TestCase {
 
   /**

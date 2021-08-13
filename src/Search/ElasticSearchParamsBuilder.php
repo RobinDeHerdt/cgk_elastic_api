@@ -156,7 +156,7 @@ class ElasticSearchParamsBuilder {
    */
   protected function buildFacetFilters(FacetCollection $facet_values): array {
     $post_filter = [];
-    /* @var \Drupal\cgk_elastic_api\Search\Facet\FacetValueInterface[] $selected_values */
+    /** @var \Drupal\cgk_elastic_api\Search\Facet\FacetValueInterface[] $selected_values */
     foreach ($facet_values as $facet => $selected_values) {
       $facetControlService = \Drupal::service('cgk_elastic_api.facet_control.' . $facet);
       if ($facetControlService instanceof CompositeFacetControlInterface) {

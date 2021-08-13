@@ -17,6 +17,7 @@ interface SyncStrategyInterface {
    *
    * @param array $settingsParams
    * @param array $mappingParams
+   *
    * @return bool
    *   TRUE if the sync is successful.
    */

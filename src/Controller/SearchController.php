@@ -2,7 +2,6 @@
 
 namespace Drupal\cgk_elastic_api\Controller;
 
-use Drupal;
 use Drupal\cgk_elastic_api\Search\ElasticSearchParamsBuilder;
 use Drupal\cgk_elastic_api\Search\ElasticSearchResultParser;
 use Drupal\cgk_elastic_api\Search\FacetedKeywordSearchAction;
@@ -21,7 +20,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Url;
-use Exception;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -199,7 +197,7 @@ class SearchController extends ControllerBase {
     try {
       $searchAction = $this->searchActionFactory->searchActionFromQuery($query, $this->facets, $request->isXmlHttpRequest());
     }
-    catch (Exception $e) {
+    catch (\Exception $e) {
       throw new AccessDeniedHttpException();
     }
 
@@ -348,7 +346,7 @@ class SearchController extends ControllerBase {
     try {
       $searchAction = $this->searchActionFactory->searchActionFromQuery($query, $this->facets, TRUE);
     }
-    catch (Exception $e) {
+    catch (\Exception $e) {
       throw new AccessDeniedHttpException();
     }
 
@@ -408,7 +406,7 @@ class SearchController extends ControllerBase {
         // This \Drupal call is hard to avoid as facets are added
         // semi-dynamically.
         // @codingStandardsIgnoreLine
-        $renderedFacet = Drupal::service('cgk_elastic_api.facet_control.' . $facet)->build($facet, $searchAction, $result);
+        $renderedFacet = \Drupal::service('cgk_elastic_api.facet_control.' . $facet)->build($facet, $searchAction, $result);
         if (!empty($renderedFacet)) {
           return $renderedFacet;
         }

@@ -2,14 +2,10 @@
 
 namespace Drupal\cgk_elastic_api\Search\Facet;
 
-use ArrayIterator;
-use Countable;
-use IteratorAggregate;
-
 /**
  * A collection of active facet values.
  */
-class FacetValuesCollection implements IteratorAggregate, Countable {
+class FacetValuesCollection implements \IteratorAggregate, \Countable {
 
   /**
    * The facet values in the collection.
@@ -32,7 +28,7 @@ class FacetValuesCollection implements IteratorAggregate, Countable {
    * {@inheritdoc}
    */
   public function getIterator() {
-    return new ArrayIterator($this->values);
+    return new \ArrayIterator($this->values);
   }
 
   /**

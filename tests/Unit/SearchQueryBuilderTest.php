@@ -9,6 +9,9 @@ use Drupal\cgk_elastic_api\Search\FacetedKeywordSearchAction;
 use Drupal\cgk_elastic_api\Search\SearchQueryBuilder;
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ */
 class SearchQueryBuilderTest extends TestCase {
 
   /**

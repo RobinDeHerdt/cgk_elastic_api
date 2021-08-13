@@ -13,6 +13,9 @@ use Drupal\cgk_elastic_api\Search\FacetedSearchAction;
 use Drupal\cgk_elastic_api\Search\SearchQueryBuilder;
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ */
 class SearchActiveFiltersBuilderTest extends TestCase {
 
   /**
@@ -116,7 +119,7 @@ class SearchActiveFiltersBuilderTest extends TestCase {
             'title' => 'Filter Industrie verwijderen',
             'aria-label' => 'Industrie',
             'data-drupal-facet-item-value' => 10,
-            'data-drupal-facet-item-facet' => 'sector'
+            'data-drupal-facet-item-facet' => 'sector',
           ],
         ],
         [
@@ -140,7 +143,7 @@ class SearchActiveFiltersBuilderTest extends TestCase {
             'title' => 'Filter Diensten verwijderen',
             'aria-label' => 'Diensten',
             'data-drupal-facet-item-value' => 12,
-            'data-drupal-facet-item-facet' => 'sector'
+            'data-drupal-facet-item-facet' => 'sector',
           ],
         ],
         [
@@ -164,7 +167,7 @@ class SearchActiveFiltersBuilderTest extends TestCase {
             'title' => 'Filter Handel verwijderen',
             'aria-label' => 'Handel',
             'data-drupal-facet-item-value' => 14,
-            'data-drupal-facet-item-facet' => 'sector'
+            'data-drupal-facet-item-facet' => 'sector',
           ],
         ],
         [
@@ -187,7 +190,7 @@ class SearchActiveFiltersBuilderTest extends TestCase {
             'title' => 'Filter < 50 werknemers verwijderen',
             'aria-label' => '< 50 werknemers',
             'data-drupal-facet-item-value' => 40,
-            'data-drupal-facet-item-facet' => 'omvang_bedrijf'
+            'data-drupal-facet-item-facet' => 'omvang_bedrijf',
           ],
         ],
       ],
@@ -232,18 +235,26 @@ class SearchActiveFiltersBuilderTest extends TestCase {
   }
 
 }
-
+/**
+ *
+ */
 class MockMetaDataStorage implements FacetValueMetaDataStorageInterface {
 
   /**
-   * @var FacetValueMetaData[]
+   * @var \Drupal\cgk_elastic_api\Search\Facet\FacetValueMetaData[]
    */
   private $values;
 
+  /**
+   *
+   */
   public function __construct(array $values) {
     $this->values = $values;
   }
 
+  /**
+   *
+   */
   public function load(string $id): ?FacetValueMetaData {
     if (isset($this->values[$id])) {
       return $this->values[$id];

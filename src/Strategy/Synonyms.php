@@ -4,7 +4,6 @@ namespace Drupal\cgk_elastic_api\Strategy;
 
 use Drupal\cgk_elastic_api\SyncStrategy;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\elasticsearch_connector\ElasticSearch\Parameters\Factory\IndexFactory;
 use Drupal\search_api\Entity\Index;
 use nodespark\DESConnector\ClientInterface;
 
@@ -24,8 +23,9 @@ class Synonyms extends SyncStrategy {
 
   /**
    * SynonymSync constructor.
-   * @param Index $index
-   * @param ConfigFactoryInterface $configFactory
+   *
+   * @param \Drupal\search_api\Entity\Index $index
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    */
   public function __construct(Index $index, ConfigFactoryInterface $configFactory) {
     parent::__construct($index);
@@ -47,7 +47,6 @@ class Synonyms extends SyncStrategy {
     $synonyms = array_map(function ($synonym) {
       return trim($synonym, ',');
     }, $synonyms);
-
 
     $settingsParams = ['index' => $this->indexName];
     $settingsParams['body'] = [

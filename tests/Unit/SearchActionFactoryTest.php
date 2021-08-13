@@ -7,7 +7,6 @@ use Drupal\cgk_elastic_api\Search\Facet\FacetCollection;
 use Drupal\cgk_elastic_api\Search\Facet\FacetValuesCollection;
 use Drupal\cgk_elastic_api\Search\Facet\FlatFacetValue;
 use Drupal\cgk_elastic_api\Search\FacetedKeywordSearchAction;
-use Drupal\cgk_elastic_api\Search\FacetedSearchAction;
 use Drupal\cgk_elastic_api\Search\SearchActionFactory;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -22,7 +21,7 @@ class SearchActionFactoryTest extends TestCase {
   /**
    * The factory to test.
    *
-   * @var SearchActionFactory
+   * @var \Drupal\cgk_elastic_api\Search\SearchActionFactory
    */
   private $factory;
 
@@ -45,6 +44,9 @@ class SearchActionFactoryTest extends TestCase {
     $this->factory = new SearchActionFactory(10, $entityTypeManagerMock);
   }
 
+  /**
+   *
+   */
   public function testBuildFromQuery() {
     $query = new ParameterBag(
       [

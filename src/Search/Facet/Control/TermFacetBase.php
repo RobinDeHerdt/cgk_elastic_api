@@ -184,7 +184,7 @@ abstract class TermFacetBase implements FacetControlInterface {
 
         $values[] = $value;
       }
-      else if ($this->includeEmptyFacets) {
+      elseif ($this->includeEmptyFacets) {
         $facetAttributes['disabled'] = 'disabled';
 
         $values[] = [
@@ -325,6 +325,9 @@ abstract class TermFacetBase implements FacetControlInterface {
     $this->canSelectMultiple = $multiple;
   }
 
+  /**
+   *
+   */
   public function getCanSelectMultiple() {
     return $this->canSelectMultiple;
   }
@@ -343,7 +346,7 @@ abstract class TermFacetBase implements FacetControlInterface {
    * Sets if facet should print facets that are empty with count 0.
    *
    * @param bool $enabled
-   *    TRUE if empty facets should be printed, FALSE otherwise.
+   *   TRUE if empty facets should be printed, FALSE otherwise.
    */
   protected function setIncludeEmptyFacets(bool $enabled) {
     $this->includeEmptyFacets = $enabled;

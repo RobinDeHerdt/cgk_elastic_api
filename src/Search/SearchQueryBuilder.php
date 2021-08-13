@@ -3,7 +3,6 @@
 namespace Drupal\cgk_elastic_api\Search;
 
 use Drupal\cgk_elastic_api\Search\Facet\FacetValueInterface;
-use InvalidArgumentException;
 
 /**
  * Builds a URL query array for a given search action.
@@ -36,7 +35,7 @@ class SearchQueryBuilder implements SearchQueryBuilderInterface {
    */
   public function buildFacetedQuery(FacetedSearchAction $searchAction): array {
     if (!$searchAction instanceof FacetedSearchAction) {
-      throw new InvalidArgumentException('Expected a ' . FacetedSearchAction::class);
+      throw new \InvalidArgumentException('Expected a ' . FacetedSearchAction::class);
     }
 
     $query = [];

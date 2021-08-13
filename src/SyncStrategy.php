@@ -28,7 +28,7 @@ class SyncStrategy implements SyncStrategyInterface {
   /**
    * SyncStrategy constructor.
    *
-   * @param Index $index
+   * @param \Drupal\search_api\Entity\Index $index
    */
   public function __construct(Index $index) {
     $this->index = $index;
@@ -61,12 +61,11 @@ class SyncStrategy implements SyncStrategyInterface {
   }
 
   /**
-   *
    * Returns the index field mapping request.
    *
-   * @param ClientInterface $client
+   * @param \nodespark\DESConnector\ClientInterface $client
    * @param $fields
-   *  A comma-separated list of fields
+   *   A comma-separated list of fields
    *
    * @return false|mixed
    */
@@ -81,7 +80,8 @@ class SyncStrategy implements SyncStrategyInterface {
     if (!empty($response)) {
       // Strip the index.
       return current($response);
-    } else {
+    }
+    else {
       return FALSE;
     }
   }

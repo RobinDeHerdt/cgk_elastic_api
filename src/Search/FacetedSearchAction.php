@@ -6,7 +6,6 @@ use Drupal\cgk_elastic_api\Search\Facet\FacetCollection;
 use Drupal\cgk_elastic_api\Search\Facet\FacetValueInterface;
 use Drupal\cgk_elastic_api\Search\Facet\FacetValuesCollection;
 use Drupal\cgk_elastic_api\Search\Facet\FlatFacetValue;
-use InvalidArgumentException;
 
 /**
  * Models the current search action.
@@ -78,8 +77,7 @@ class FacetedSearchAction implements FacetedSearchActionInterface {
    * {@inheritdoc}
    */
   public function facetValueWasChosen(string $facet, string $value): bool {
-    return
-      $this->chosenFacetValues->has($facet) &&
+    return $this->chosenFacetValues->has($facet) &&
       $this->chosenFacetValues->values($facet)->contains(new FlatFacetValue($value));
   }
 
@@ -88,13 +86,13 @@ class FacetedSearchAction implements FacetedSearchActionInterface {
    */
   public function withoutFacetValue(string $facet, FacetValueInterface $facetValue): FacetedSearchAction {
     if (!$this->chosenFacetValues->has($facet)) {
-      throw new InvalidArgumentException(
+      throw new \InvalidArgumentException(
         sprintf('there are no chosen values for facet %s', $facet)
       );
     }
 
     if (!$this->chosenFacetValues->values($facet)->contains($facetValue)) {
-      throw new InvalidArgumentException(
+      throw new \InvalidArgumentException(
         sprintf('value %s is not chosen for facet %s', $facetValue->value(), $facet)
       );
     }
@@ -120,7 +118,7 @@ class FacetedSearchAction implements FacetedSearchActionInterface {
    */
   public function withFacetValue(string $facet, FacetValueInterface $value): FacetedSearchAction {
     if ($this->chosenFacetValues->has($facet) && $this->chosenFacetValues->values($facet)->contains($value)) {
-      throw new InvalidArgumentException(
+      throw new \InvalidArgumentException(
         sprintf('value %s is already chosen for facet %s', $value->value(), $facet)
       );
     }
