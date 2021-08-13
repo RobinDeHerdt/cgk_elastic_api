@@ -2,8 +2,8 @@
 
 namespace Drupal\cgk_elastic_api\Strategy;
 
+use Drupal\cgk_elastic_api\SyncStrategy;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\cgk_elastic_api\SyncStrategyInterface;
 use Drupal\elasticsearch_connector\ElasticSearch\Parameters\Factory\IndexFactory;
 use Drupal\search_api\Entity\Index;
 use nodespark\DESConnector\ClientInterface;
@@ -13,14 +13,7 @@ use nodespark\DESConnector\ClientInterface;
  *
  * @package Drupal\cgk_elastic_api\Strategy
  */
-class Synonyms implements SyncStrategyInterface {
-
-  /**
-   * Index.
-   *
-   * @var \Drupal\search_api\Entity\Index
-   */
-  private $index;
+class Synonyms extends SyncStrategy {
 
   /**
    * Config factory.
@@ -31,16 +24,18 @@ class Synonyms implements SyncStrategyInterface {
 
   /**
    * SynonymSync constructor.
+   * @param Index $index
+   * @param ConfigFactoryInterface $configFactory
    */
   public function __construct(Index $index, ConfigFactoryInterface $configFactory) {
-    $this->index = $index;
+    parent::__construct($index);
     $this->configFactory = $configFactory;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function execute(ClientInterface $client) {
+  public function execute(ClientInterface $client, array $settingsParams = [], array $mappingParams = []) {
     $synonyms = $this->configFactory->get('cgk_elastic_api.synonym_settings')
       ->get('synonyms');
 
@@ -53,10 +48,9 @@ class Synonyms implements SyncStrategyInterface {
       return trim($synonym, ',');
     }, $synonyms);
 
-    $index = IndexFactory::getIndexName($this->index);
 
-    $params = ['index' => $index];
-    $params['body'] = [
+    $settingsParams = ['index' => $this->indexName];
+    $settingsParams['body'] = [
       "index" => [
         "analysis" => [
           "filter" => [
@@ -76,17 +70,7 @@ class Synonyms implements SyncStrategyInterface {
       ],
     ];
 
-    try {
-      $client->indices()->close(['index' => $index]);
-      $client->indices()->putSettings($params);
-      $client->indices()->open(['index' => $index]);
-      sleep(1);
-      return TRUE;
-    }
-    catch (\Exception $e) {
-      watchdog_exception('cgk_elastic_api', $e);
-      return FALSE;
-    }
+    parent::execute($client, $settingsParams);
   }
 
 }

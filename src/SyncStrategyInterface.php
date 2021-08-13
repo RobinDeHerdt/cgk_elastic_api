@@ -15,9 +15,11 @@ interface SyncStrategyInterface {
    * @param \nodespark\DESConnector\ClientInterface $client
    *   The Elasticsearch client.
    *
+   * @param array $settingsParams
+   * @param array $mappingParams
    * @return bool
    *   TRUE if the sync is successful.
    */
-  public function execute(ClientInterface $client);
+  public function execute(ClientInterface $client, array $settingsParams = [], array $mappingParams = []);
 
 }
