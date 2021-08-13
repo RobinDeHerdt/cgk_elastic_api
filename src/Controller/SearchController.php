@@ -570,21 +570,30 @@ class SearchController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Get facet machine names.
+   *
+   * This function must be used to assign facets
+   * in all classes that inherit this base class.
    */
   public function getFacets() {
     return [];
   }
 
   /**
-   * {@inheritdoc}
+   * Get the search route name.
+   *
+   * This function must be used to assign route name in all classes that inherit
+   * this base class, since the route name will differ for each search instance.
    */
   public function getSearchRouteName() {
     return 'cgk_elastic_api.search';
   }
 
   /**
-   * {@inheritdoc}
+   * Get the ajax filter search route name.
+   *
+   * This function must be used to assign route name in all classes that inherit
+   * this base class, since the route name will differ for each search instance.
    */
   public function getFilterRouteName() {
     return 'cgk_elastic_api.filter';
