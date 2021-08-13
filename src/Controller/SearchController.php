@@ -161,8 +161,8 @@ class SearchController extends ControllerBase {
     $this->nodeViewBuilder = $entityTypeManager->getViewBuilder('node');
 
     $this->facets = [];
-    $this->filterRouteName = 'cgk_elastic_api.filter';
-    $this->searchRouteName = 'cgk_elastic_api.search';
+    $this->filterRouteName = $this->getFilterRouteName();
+    $this->searchRouteName = $this->getSearchRouteName();
   }
 
   /**
@@ -494,7 +494,7 @@ class SearchController extends ControllerBase {
       '#parameters' => $query->all(),
       '#total_items' => $total,
       '#items_per_page' => $size,
-      '#route_name' => $this->searchRouteName,
+      '#route_name' => $this->getSearchRouteName(),
     ];
   }
 
@@ -567,6 +567,27 @@ class SearchController extends ControllerBase {
    */
   protected function shouldRetainFilter() {
     return FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFacets() {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSearchRouteName() {
+    return 'cgk_elastic_api.search';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFilterRouteName() {
+    return 'cgk_elastic_api.filter';
   }
 
 }
