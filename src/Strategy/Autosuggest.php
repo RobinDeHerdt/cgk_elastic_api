@@ -17,7 +17,7 @@ class Autosuggest extends SyncStrategy {
    */
   public function execute(ClientInterface $client, array $settingsParams = [], array $mappingParams = []) {
     $response = $this->getFieldMapping($client, 'title');
-    $fieldMapping = $response['mappings'][$this->index->id()]['title']['mapping']['title'];
+    $fieldMapping = $response['mappings']['title']['mapping']['title'];
 
     $fieldMapping['fields']['keyword'] = [
       "type" => "keyword",
