@@ -24,7 +24,6 @@ class DidYouMean extends SyncStrategy {
 
     $mappingParams = [
       'index' => $this->indexName,
-      'type' => $this->index->id(),
       'body' => [
         'properties' => [
           'title' => $fieldMapping,
@@ -35,21 +34,23 @@ class DidYouMean extends SyncStrategy {
     $settingsParams = [
       'index' => $this->indexName,
       'body' => [
-        'analysis' => [
-          'filter' => [
-            'shingle' => [
-              'type' => 'shingle',
-              'min_shingle_size' => 2,
-              'max_shingle_size' => 3,
+        'settings' => [
+          'analysis' => [
+            'filter' => [
+              'shingle' => [
+                'type' => 'shingle',
+                'min_shingle_size' => 2,
+                'max_shingle_size' => 3,
+              ],
             ],
-          ],
-          'analyzer' => [
-            'trigram' => [
-              'type' => 'custom',
-              'tokenizer' => 'standard',
-              'filter' => [
-                'lowercase',
-                'shingle',
+            'analyzer' => [
+              'trigram' => [
+                'type' => 'custom',
+                'tokenizer' => 'standard',
+                'filter' => [
+                  'lowercase',
+                  'shingle',
+                ],
               ],
             ],
           ],

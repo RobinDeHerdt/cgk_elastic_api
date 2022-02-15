@@ -51,18 +51,20 @@ class Synonyms extends SyncStrategy {
     $settingsParams = ['index' => $this->indexName];
     $settingsParams['body'] = [
       "index" => [
-        "analysis" => [
-          "filter" => [
-            "synonym" => [
-              "type" => "synonym_graph",
-              "synonyms" => $synonyms,
-              "ignore_case" => TRUE,
+        'settings' => [
+          "analysis" => [
+            "filter" => [
+              "synonym" => [
+                "type" => "synonym_graph",
+                "synonyms" => $synonyms,
+                "ignore_case" => TRUE,
+              ],
             ],
-          ],
-          "analyzer" => [
-            "default" => [
-              "tokenizer" => "whitespace",
-              "filter" => ["lowercase", "synonym"],
+            "analyzer" => [
+              "default" => [
+                "tokenizer" => "whitespace",
+                "filter" => ["lowercase", "synonym"],
+              ],
             ],
           ],
         ],

@@ -28,7 +28,6 @@ class Autosuggest extends SyncStrategy {
 
     $mappingParams = [
       'index' => $this->indexName,
-      'type' => $this->index->id(),
       'body' => [
         "properties" => [
           "search_suggest" => [

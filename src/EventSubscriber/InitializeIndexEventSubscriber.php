@@ -63,20 +63,22 @@ class InitializeIndexEventSubscriber implements EventSubscriberInterface {
   public function prepareSearchIndex(PrepareIndexEvent $event) {
     $config = $event->getIndexConfig();
     $config['body'] = [
-      'analysis' => [
-        'tokenizer' => [
-          'ngram_tokenizer' => [
-            'type' => 'ngram',
-            'min_gram' => 3,
-            'max_gram' => 3,
+      'settings' => [
+        'analysis' => [
+          'tokenizer' => [
+            'ngram_tokenizer' => [
+              'type' => 'ngram',
+              'min_gram' => 3,
+              'max_gram' => 3,
+            ],
           ],
-        ],
-        'analyzer' => [
-          'ngram_analyzer' => [
-            'type' => 'custom',
-            'tokenizer' => 'ngram_tokenizer',
-            'filter' => [
-              'lowercase',
+          'analyzer' => [
+            'ngram_analyzer' => [
+              'type' => 'custom',
+              'tokenizer' => 'ngram_tokenizer',
+              'filter' => [
+                'lowercase',
+              ],
             ],
           ],
         ],
@@ -95,7 +97,7 @@ class InitializeIndexEventSubscriber implements EventSubscriberInterface {
   public function prepareMapping(PrepareIndexMappingEvent $event) {
     $mapping = $event->getIndexMappingParams();
 
-    $mapping['body'][$this->index->id()]['properties']['title']['fields'] = [
+    $mapping['body']['properties']['title']['fields'] = [
       'ngram' => [
         'type' => 'text',
         'analyzer' => 'ngram_analyzer',

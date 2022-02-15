@@ -25,7 +25,6 @@ class CustomAll extends SyncStrategy {
 
     $mappingParams = [
       'index' => $this->indexName,
-      'type' => $this->index->id(),
       'body' => [
         'properties' => [
           'custom_all' => [

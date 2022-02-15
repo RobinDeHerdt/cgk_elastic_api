@@ -72,7 +72,6 @@ class SyncStrategy implements SyncStrategyInterface {
   public function getFieldMapping(ClientInterface $client, $fields) {
     $params = [
       'index' => $this->indexName,
-      'type' => $this->index->id(),
       'fields' => $fields,
     ];
 

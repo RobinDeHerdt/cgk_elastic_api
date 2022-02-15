@@ -21,7 +21,7 @@ class ElasticSearchResultParser {
    *   The parsed search result.
    */
   public function parse(FacetedSearchActionInterface $searchAction, array $response): SearchResult {
-    $total = (int) $response['hits']['total'];
+    $total = (int) $response['hits']['total']['value'];
 
     $raw_hits = $response['hits']['hits'];
 
