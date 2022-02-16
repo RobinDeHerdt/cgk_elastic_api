@@ -46,7 +46,6 @@ class TitleSuggester implements SuggesterInterface {
 
     $response = $this->repository->query([
       'index' => $index,
-      'type' => $this->index->id(),
       'body' => [
         "suggest" => [
           "text" => $text,
