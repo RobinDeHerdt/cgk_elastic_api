@@ -33,7 +33,18 @@
           </div>
 
           <span class="u-hidden-mobile suggestion-wrapper">
-            <h1>{{ result_count }}</h1>
+            {% if result_count %}
+              <strong>
+                {% trans %}
+                  {{ result_count }} result found
+                {% plural result_count %}
+                  {{ result_count }} results found
+                {% endtrans %}
+              </strong>
+            {% elseif result_count is same as(0) %}
+              <strong>{{ "No results found" }}</strong>
+            {% endif %}
+
             {% if did_you_mean %}
               <div class="did-you-mean">
                 {{ 'Did you mean' | t }}
